@@ -1,0 +1,66 @@
+<!-- REMEMBER: THIS COMPONENT SHOWS UP NEAR THE BOTTOM OF THE MAIN PAGE -->
+<!-- news component goes here -->
+<!-- foreach on categories here -->
+ <!-- Note: this category stuff doesn't seem to present on site. Might delete this block later
+  UPDATE: The Board List goes here.  -->
+  <!-- foreach here on category. Each category has an array of board lists. -->
+	<!-- category anchor component here -->
+	<div class="container boards">
+        <div class="reomcatname"><h1>category.name</h1><span>$[category.display_name]</span></div>
+		<div class="content cap-bottom">
+            <!-- replace with board list component, will insert data based on that. -->
+			category.board_list
+		</div>
+	</div>
+<div class="reomcatname"><h1>FORUM STATISTICS</h1><span>WELCOME TO FIGHT FOR JUSTICE</span></div>
+<div class="reominfoo">
+    <div class="reominfonum" title="ONLINE TODAY"><div><h1>total_staff_online_24</h1>
+        <h2>STAFF</h2></div></div>
+    <div class="reominfonum" title="ONLINE TODAY"><div><h1>total_members_online_24</h1>
+        <h2>MEMBERS</h2></div></div>
+    <div class="reominfonum" title="ONLINE TODAY"><div><h1>total_guests_online_24</h1>
+        <h2>GUESTS</h2></div></div>
+</div>
+<!-- This block is all the online information stuff. Figuring this out is going to be a pain, and more importantly not a high priority -->
+<div class="reominfo">
+    <div class="reominfoonline"><div class="reominfoonline1">
+        <!-- shows who is currently online -->
+        <!-- {foreach $[online_user]}
+            <a href="$[online_user.href]" title="$[online_user.name]"><div class="reominfoonline2"><div class="reominfoonline3" style="border-color:#$[online_user.group.color];">$[online_user.avatar]</div></div></a>
+													{/foreach}
+													{if $[total_online_not_shown]}
+														, and <a class="$[view_active_members_link.class]" href="$[view_active_members_link.href]">$[total_online_not_shown] more...</a>
+                    {/if} -->
+        
+    </div></div>
+    <div class="reominfonewest">
+        <div class="reominfonewestimg"><div class="reominfonewestimg2">newest_user.avatar</div></div>
+        <div class="reominfonewest1">newest_user</div>
+        <div class="reominfonewest2">WELCOMING OUR NEWEST MEMBER</div>
+    </div>
+    <div class="reominfostats"><table style="width:100%;height:100%;"><tr><td style="padding:0px!important;vertical-align:bottom;">
+        <div>forum statistics</div>
+        <b>FIGHT FOR JUSTICE</b> BOASTS A TOTAL OF <b>total_threads THREADS</b> CONTAINING <b>total_posts POSTS</b>. THESE WERE CREATED BY OUR <b>total_members MEMBERS</b>. THE MOST MEMBERS WE'VE HAD ON AT ONE TIME WAS <b>most_users_online MEMBERS</b>.
+        </td></tr></table>
+    </div>
+    <div class="reominfooffline"><div>
+        
+        <!-- fore each on current online members -->
+														$[online_user_24] 
+                                                        <!-- if they're invisible, do this -->
+                                                        <!-- {if $[online_user_24.invisible]} <span class="small">(invisible)</span>{/if} -->
+                                                        <!-- this is just a comma??? -->
+                                                        <!-- $[online_user_24.comma] -->
+													<!-- end foreach -->
+                                                     <!-- something with this end block, tbd -->
+													<!-- {if $[total_online_not_shown_24]}
+														, and <a class="$[view_todays_active_members_link.class]" href="$[view_todays_active_members_link.href]">$[total_online_not_shown_24] more...</a>
+													{/if} -->
+        
+    </div></div>
+    <div class="reoninforecent">
+        <!-- these first two anchors aren't used... -->
+        <a href="$[recent_threads_link.href]"><div>NEW THREADS</div></a>
+        <a href="$[recent_posts_link.href]"><div>NEW POSTS</div></a>
+        <i class="lnr lnr-book"></i>LAST POST IN $[last_updated_thread.recent_link] BY $[last_updated_thread.last_post.created_by]</div>
+</div>

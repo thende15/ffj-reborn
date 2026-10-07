@@ -1,0 +1,20 @@
+<div class="container quick-reply">
+    <div class="reomcatname"><h1><a href="$[reply_button.href]">CREATE REPLY</a></h1><span>QUICK REPLY</span></div>
+	<div class="content cap-bottom">
+		$[form.header]
+			<!-- {if $[form.created_by_guest_name.input]} -->
+			<!-- <div class="guest_name"> -->
+			<div>
+				<label>Guest Name:</label>
+				$[form.created_by_guest_name.input]
+			</div>
+			<!-- {/if} -->
+			<div class="message">
+				$[form.message.input]
+			</div>
+			$[captcha]
+			$[form.post.button]
+		$[form.footer]
+	</div>
+</div>
+

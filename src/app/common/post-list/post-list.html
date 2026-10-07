@@ -1,0 +1,61 @@
+<!-- foreach on this, post the post content -->
+ <!-- removing class: class="$[post.content_class]{if $[post.even]} even{/if}{if $[viewing_recent_posts]} recent{/if}" -->
+	<tr id="$[post.content_id]" >
+		<td class="$[post.unblocked_class]">
+			<table role="grid">
+				<tr>
+					<td class="left-panel" rowspan="2" style="width:145px!important;">
+						$[post.created_by.miniprofile]
+					</td>
+					<td class="content">
+						<article>
+							<div class="content-head ui-helper-clearfix">
+                                <div class="reomthreaduh"></div>
+								<div class="reomthreaduh1">
+								<div class="info">
+                                    <!-- style for below div: style="background-color:#$[post.created_by.group.color]!important;" -->
+                                    <div class="reomthreaduh2" ><a href="$[post.thread.link.href]">$[post.thread.subject]</a></div>
+                                    <div class="reomthreaduh3">$[post.created_on]</div>
+								</div>
+								<div class="controls" style="overflow:visible!important;">
+                                    <!-- style for below div: style="color:#$[post.created_by.group.color]!important;" -->
+                                    <a href="$[post.quote_button.href]"><div class="reomthreaduh4"><i class="lnr lnr-link" ></i> QUOTE</div></a>
+									<!-- {if $[post.can.edit]} -->
+                                    <a href="$[post.edit_button.href]"><div class="reomthreaduh4">
+                                        <!-- style for below div: style="color:#$[post.created_by.group.color]!important;" -->
+                                        <i class="lnr lnr-magic-wand" ></i> EDIT</div></a>
+                                        <!-- {/if} -->
+									$[post.likes.button]
+									$[post.select_options]
+								</div>
+                                </div>
+							</div>
+                            <div class="reomthreaduh5">$[post.likes]</div>
+							<h3 class="title aria-hidden">Post by $[post.created_by.name] on $[post.created_on]</h3>
+							<div class="message">$[post.message]</div>
+						</article>
+					</td>
+				</tr>
+				<tr>
+					<td class="foot">
+						<!-- {if $[post.edited]} -->
+							<div class="edited_by"><span class="italic">Last Edit:</span> 
+                                <!-- $[post.edited.date] by $[post.edited.by_user]{if $[post.edited.reason]}: $[post.edited.reason]{/if} -->
+                            </div>
+						<!-- {/if} -->
+						<!-- {if $[post.created_by.signature]} -->
+							<div class="signature">$[post.created_by.signature]</div>
+						<!-- {/if} -->
+					</td>
+				</tr>
+			</table>
+		</td>
+		<!-- {if $[post.is_blocked]} -->
+			<td class="$[post.blocked_class] content center">
+				<div class="message note pad-bottom">This post is hidden</div>
+				$[post.display_blocked_post_button]
+			</td>
+		<!-- {/if} -->
+	</tr>
+<!-- if there are no posts in this thread, render this -->
+	<tr class="last"><td class="last center" colspan="1">No posts were found.</td></tr>

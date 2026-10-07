@@ -1,0 +1,34 @@
+<div class="container show-user">
+    <!-- this was in the below div: style="background-color: #$[user.group.color]!important;" -->
+	<div class="reomcatname" >
+        <div class="reomusertabs">
+        <ul class="ui-helper-clearfix">
+            <!-- foreach here for menu options -->
+             <!-- also has an active option, class being menu.active -->
+            <li><a href="$[menu.href]">$[menu.text]</a></li></ul></div>
+        <h1>@$[user.username]</h1><span>$[user.name]</span></div>
+    <div class="reomuser"><table style="width:100%;"><tr>
+        <td class="reomuserleft">
+            <div class="reomuserbigimg1">
+            
+            <!--- REPLACE THE 'https://image.ibb.co/giJsPy/ReAv.png' HERE WITH YOUR DEFAULT AVATAR --->
+            <!-- not entirely sure what all this does -->
+    		<!-- <div class="reomuserbigimg" style="background-image: url('https://i.imgur.com/5C8eODJ.jpg');
+            {foreach $[user.mini_custom_field]}
+            {if $[user.mini_custom_field.name] == "250x350 Avatar"}background-image: url('$[user.mini_custom_field.value]');{/if}{/foreach}background-size:cover;"></div> -->
+                
+            </div></td>
+        <td class="reomuserright"> 
+            
+            <div class="reomuserbuttons">
+                <!-- breaks template, commenting for now -->
+                <!-- <br>
+                    options		send_message_button		edit_profile_button	follow_button
+                </br> -->
+                </div>
+            <div class="reomuserpersonal">
+                user.personal_text
+            </div>
+            $[content]</td>
+        </tr></table></div>
+</div>

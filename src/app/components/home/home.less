@@ -1,0 +1,144 @@
+// @empty: ~"";
+// @all_gradients: none;
+// @default_forum_text_font_family: Verdana,Arial;
+// @background_color: #eeeeee;
+// @inverse_color: #151515;
+// @accent_color: #d11717;
+
+// @container_background_color_1: @background_color;
+// @title_buttons_color: @background_color;
+// @container_background_color_1: @background_color;
+// @container_inner_border_color: @background_color;
+// @container_text_color_1: @inverse_color;
+// @content_area_text_font: @empty;
+// @container_outer_border_color: @background_color;
+// @container_links_color: @accent_color;
+
+// @wrapper_width: 1000px;
+
+// @timestamp_color: lighten(@container_text_color_1, 15%);
+
+// @title_bar_background_color: @inverse_color;
+// @title_text_color: @background_color;
+// @title_buttons_background_color: @accent_color;
+// @title_buttons_color: @background_color;
+
+// .rounded-corners(@a, @b, @c, @d) {
+// 	border-radius: @arguments;
+// 	-moz-border-radius: @arguments;
+// 	-webkit-border-radius: @arguments;
+// }
+
+// .rounded-corners(@a, @b, @c) {
+// 	border-radius: @arguments;
+// 	-moz-border-radius: @arguments;
+// 	-webkit-border-radius: @arguments;
+// }
+
+// .rounded-corners(@a, @b) {
+// 	border-radius: @arguments;
+// 	-moz-border-radius: @arguments;
+// 	-webkit-border-radius: @arguments;
+// }
+
+// .rounded-corners(@a: 0px) {
+// 	border-radius: @arguments;
+// 	-moz-border-radius: @arguments;
+// 	-webkit-border-radius: @arguments;
+// }
+
+// .hsla-bgcolor-safe(transparent, @alpha) {
+// 	background-color: transparent;
+// }
+
+// .hsla-bgcolor-safe(@color, @alpha) when (iscolor(@color)) {
+// 	background-color: @color;
+// 	background-color: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+// }
+
+// @images_path: '//storage.proboards.com/forum/images';
+
+// @title_bar_background_image: @all_gradients;
+// @title_bar_background_attachment: @empty;
+// @title_bar_background_repeat: repeat-x;
+// @title_bar_background_position: left center;
+// @title_bar_border: @empty;
+// @title_bar_border_radius: 0px;
+// @title_text_font: bold 100% @default_forum_text_font_family;
+// @title_text_decoration: @empty;
+// @title_text_transform: @empty;
+// @title_text_variant: @empty;
+// @title_text_align: @empty;
+// @title_text_shadow: @empty;
+// @title_buttons_background_image: @all_gradients;
+// @title_buttons_background_attachment: scroll;
+// @title_buttons_background_repeat: repeat-x;
+// @title_buttons_background_position: left center;
+// @title_buttons_font: 100% @default_forum_text_font_family;
+// @title_buttons_decoration: @empty;
+// @title_buttons_hover_background: @empty;
+// @title_buttons_hover_color: @title_buttons_color;
+// @title_buttons_hover_font: @title_buttons_font;
+// @title_buttons_hover_decoration: @title_buttons_decoration;
+// @content_background: @container_background_color_1;
+// @content_border_width: 0px;
+// @content_border_style: solid;
+// @content_border_radius: 0px;
+// @content_area_background: @container_background_color_1;
+// @content_area_border: 0px solid @container_inner_border_color;
+// @content_area_border_radius: 0px;
+// @content_area_text_color: @container_text_color_1;
+// @content_area_text_font: @empty;
+// @content_area_links_font: @content_area_text_font;
+// @content_area_links_decoration: @empty;
+// @action_bar_background: @container_inner_border_color;
+// @action_bar_border: 1px solid @container_outer_border_color;
+// @action_bar_border_radius: @empty;
+// .container > .title-bar { background-color: @title_bar_background_color; background-image: @title_bar_background_image; background-attachment: @title_bar_background_attachment; background-repeat: @title_bar_background_repeat; background-position: @title_bar_background_position; border: @title_bar_border; .rounded-corners(@title_bar_border_radius); }
+// .ui-dialog .ui-dialog-titlebar { padding: .3em 1em; position: relative; background-color: @title_bar_background_color; background-image: @title_bar_background_image; background-attachment: @title_bar_background_attachment; background-repeat: @title_bar_background_repeat; background-position: @title_bar_background_position; border: @title_bar_border; .rounded-corners(@title_bar_border_radius); }
+// .ui-dialog .ui-dialog-title { color: @title_text_color; font: @title_text_font; text-decoration: @title_text_decoration; font-variant: @title_text_variant; text-transform: @title_text_transform; text-align: @title_text_align; text-shadow: @title_text_shadow; float: left; margin: .1em 16px .2em 0; }
+// .container > .title-bar h1, .container > .title-bar h2, .container > .title-bar h3 { color: @title_text_color; font: @title_text_font; text-decoration: @title_text_decoration; font-variant: @title_text_variant; text-transform: @title_text_transform; text-align: @title_text_align; text-shadow: @title_text_shadow; }
+// .container > .title-bar > .controls li a, .container > .title-bar > .controls li div { color: @title_buttons_color; background-color: @title_buttons_background_color; background-image: @title_buttons_background_image; background-attachment: @title_buttons_background_attachment; background-repeat: @title_buttons_background_repeat; background-position: @title_buttons_background_position; font: @title_buttons_font; text-decoration: @title_buttons_decoration; height: 30px; line-height: 30px !important; padding: 0 10px; }
+// .container > .title-bar > .controls:hover li a, .container > .title-bar > .controls:hover li div { color: @title_buttons_hover_color !important; background: @title_buttons_hover_background; font: @title_buttons_hover_font; text-decoration: @title_buttons_hover_decoration !important; }
+// .container > .content, .ui-dialog .ui-dialog-content, .ui-dialog .ui-dialog-buttonpane, .container.copy .clone { color: @container_text_color_1; background: @content_background; border-width: @content_border_width; border-style: @content_border_style; border-color: @container_outer_border_color; border-top-width: 0px; padding: 0px; .rounded-corners(@content_border_radius); }
+// .content-box { background: @content_area_background; border: @content_area_border; .rounded-corners(@content_area_border_radius); color: @content_area_text_color; font: @content_area_text_font; }
+// .content-box a, .container a { color: @container_links_color; font: @content_area_links_font; text-decoration: @content_area_links_decoration; }
+// .container > .control-bar { background: @action_bar_background; border: @action_bar_border; border-top-width: 0px; border-bottom-width: 0px; .rounded-corners(@action_bar_border_radius); margin-bottom: 0px; }
+// .container { margin-bottom: 10px; color: @container_text_color_1; }
+// .container > .title-bar { min-height: 30px; padding: 0px 10px; }
+// .container > .title-bar h1, .container > .title-bar h2, .container > .title-bar h3 { line-height: 30px !important; display: inline; }
+// .container > .title-bar.bbcode { min-height: 30px; padding: 0px; }
+// .container > .title-bar.bbcode h2 { width: (@wrapper_width - 10); line-height: inherit !important; padding: 0px; display: block; }
+// *+html .container > .title-bar.bbcode h2 { line-height: 16px !important; }
+// .title_wrapper { padding: 7px 10px; overflow: hidden; }
+// .title_wrapper img { display: block; }
+// .container abbr.time { color: @timestamp_color; }
+// .container .note { color: lighten(@container_text_color_1, 15%); }
+// .container > .title-bar > .controls { float: right; }
+// .container > .control-bar > .controls { float: right; padding: 5px; color: #000000; }
+// .container > .content { overflow: visible; }
+// .controls > li a { display: inline-block; }
+// .control-bar .ui-pagination { padding: 5px 5px 3px 10px; }
+// .control-bar > div.float-left { padding-left: 10px; padding-top: 8px; padding-bottom: 8px; }
+// .control-bar > div.float-left img { padding-right: 5px; }
+// .control-bar .controls ul { z-index: 233; }
+// .control-bar .controls .ui-selectMenu-box { margin-left: 10px; }
+// .control-bar .ui-search { padding-bottom: 5px !important; }
+// .ui-selectMenu-box { border: 1px solid darken(@container_inner_border_color, 20%); }
+// .ui-selectMenu-box .arrow.down > span { border-top-color: #000000; }
+// .ui-dialog { .rounded-corners(); .hsla-bgcolor-safe(@container_outer_border_color, .5); }
+// .ui-dialog .ui-dialog-titlebar-close:hover span, .ui-dialog .ui-dialog-titlebar-close:focus span { background-image:url('@{images_path}/ui-icons.png'); background-position: -20px, 0px; }
+// .ui-dialog div.ui-dialog-buttonpane.ui-widget-content { text-align: right; margin-top: 10px; padding: 0 0 0 10px; border-width: 1px; .rounded-corners(5px); }
+// .ui-dialog div.section { text-align: center; background-color: @container_background_color_1; border-width: 1px; border-style: solid; border-color: @container_inner_border_color; .rounded-corners(10px); padding: 10px; margin: 10px 0; }
+// .ui-search .search-input.filters-input { .rounded-corners(); }
+// .ui-search .search-input { line-height: 16px !important; padding: 2px; border-width: 1px; border-style: solid; border-color: darken(@container_inner_border_color, 20%); .rounded-corners(5px, 0, 0, 5px); }
+// .ui-search .search-filters-button { display: inline-block; width: auto; height: auto; margin-left: -2px; min-height: 19px; padding: 3px 4px 2px 4px; border-width: 1px 1px 1px 0px !important; border-style: solid; border-color: darken(@container_inner_border_color, 20%); .rounded-corners(0, 5px, 5px, 0); vertical-align: top; cursor: pointer; }
+// .ui-search .search-filters-button .icon { display: inline-block; width: auto; height: auto; }
+// .ui-search .search-filters-button.state-active { background: @title_buttons_color; }
+// .event_icon { cursor: pointer; }
+// .container.copy .clone { .rounded-corners(0px); border-collapse: inherit; border-bottom-width: 0px; }
+
+// .reomcatname { background-color:@accent_color;font:bold 50px Roboto Condensed;text-transform:uppercase;line-height:40px;padding:40px;margin-left:-85px;margin-bottom:40px;color:@background_color }
+// .reomcatname h1 { position:absolute;background-color:@inverse_color;color:@background_color;font:bold 10px Roboto Condensed;line-height:10px;padding:10px 15px;z-index:1;letter-spacing:.5px;margin:20px 0px 0px -10px; }
+// .reomcatname span { opacity:1; }
+// .reomcatname h1 a { color:@background_color;font:bold 10px Roboto Condensed;line-height:10px; }

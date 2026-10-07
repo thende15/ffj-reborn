@@ -1,0 +1,39 @@
+<!-- there is a foreach on "board". this is just the list of items that we see on the main page of every item in a specific board.
+ this has nothing to do with the "board" component, though that data is probably found in this particular list. -->
+ <!-- REMEMBER: THIS SHOWS ON THE MAIN PAGE -->
+<div id="$[board.content_id]" class="$[board.content_class]"><div class="main clickable">
+    
+        <!--- DEFAULT AVATAR IMAGE --->
+        <div class="reomboredimgleft">
+            <!-- below image is posted if there are no posts within that board -->
+            <img src="https://i.imgur.com/Nv3Z27w.png">
+            <!-- avatar of the last person to post -->
+            board.last_thread.last_post.created_by.avatar</div>
+    
+            <!-- These two divs are for icons on the far left. removing part of the titles for now, but they take the total threads/posts in these boards -->
+        <div class="reomborednum" title="X THREADS"><i class="lnr lnr-layers"></i></div>
+        <div class="reomborednum" title="Y POSTS" style="margin:105px 0px 0px -160px;"><i class="lnr lnr-bubble"></i></div>
+    
+	<div class="reombored">
+        
+        <!--- DEFAULT BOARD IMAGE --->
+        <div class="reomboredright" style="background-image:url(https://placehold.it/1x1/151515);">
+            
+            <!-- if there are subboards, show this plus -->
+            <div class="reomboredsub1">+</div>
+            
+            <div class="reomboredsub"><table style="width:100%;height:100%;"><tr><td style="padding:0px!important;vertical-align:bottom;">
+            <!-- foreach, shows the subboards on hover. Anchor has the link to it -->
+            <a href=""><div class="rcboredsub1">board.sub_board.name</div></a>
+            </td></tr></table></div>
+        </div>        
+        <!-- name of the subboard -->
+        <div class="reomboredname">board</div>
+        <!-- most recent post -->
+        <div class="reomboredrecent">if board.last_thread there is a last thread, show = "board.last_thread BY board.last_thread.last_post.created_by ON board.last_thread.last_post.created_on"
+            <!-- else block if there are no recent threads -->
+            NO THREADS HAVE BEEN MADE IN THIS BOARD</div>
+        <div class="reomboreddesc"><p class="description">board.description</p></div>
+    </div>
+</div></div>
+<div style="height:30px;"></div>

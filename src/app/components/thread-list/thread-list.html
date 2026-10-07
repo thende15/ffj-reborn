@@ -1,0 +1,27 @@
+<!-- foreach on the thread list to populate threads -->
+<tr id="$[thread.content_id]" class="$[thread.content_class]" style="padding:0px!important;margin:0px!important;overflow:visible!important;"><td style="padding:0px!important;margin:0px!important;overflow:visible!important;">
+    <div class="reomthread">
+    <table class="main clickable" style="padding:0px!important;margin:0px!important;width:100%;"><tr>
+        <td class="reomthreadimg"><div class="reomthreadimg2">thread.last_post.created_by.avatar</div></td>
+        <td class="reomthreadmain">
+            <div class="reomthreadmain1">
+                <!-- this just shows the thread's checkbox. Assuming that class allows access to it if there are right permissions -->
+                <div class="reomthreadcheck">thread.checkbox</div>
+                <!-- commenting this out for now, but it shows if the thread is locked or stickied or is an announcement. Has the icons. -->
+                <!-- {if $[thread.is_announcement]}<i class="lnr lnr-flag"></i>{/if}{if $[thread.is_locked]}<i class="lnr lnr-lock"></i>{/if}{if $[thread.is_sticky]}<i class="lnr lnr-paperclip"></i>{/if} -->
+                <span class="link target">thread name here I believe</span>
+            </div>
+            <div class="reomthreadmain2"></div>
+        </td>
+        <!-- far right area, information on who posted what when and how many views and replies there are -->
+        <td class="reomthreadnum">
+            <div><i class="lnr lnr-pencil" title="ORIGINAL POST"></i>thread.created_by thread.created_on</div>
+            <div><i class="lnr lnr-user" title="LAST POST"></i>thread.last_post.created_by thread.last_post.created_on</div>
+            <div><i class="lnr lnr-tablet" title="THREAD COUNT"></i>thread.views if $[thread.views] == 1view elseviews + thread.replies_count if thread.num_posts == 2 reply replies</div>
+        </td>
+        </tr></table></div>
+    </td></tr>
+<!-- if block if there are no threads -->
+	<tr class="last">
+		<td class="last center" colspan="7">No threads were found.</td>
+	</tr>
