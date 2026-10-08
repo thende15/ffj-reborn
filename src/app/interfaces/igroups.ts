@@ -1,1 +1,4 @@
-export interface IGroup {}
+export interface IGroup {
+    id: number; 
+    color: string;
+}
