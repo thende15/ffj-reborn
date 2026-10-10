@@ -57,10 +57,11 @@
             <div class="reomtopright2">QUICK NAVIGATION</div>
 				<div id="navigation-menu" class="ui-helper-clearfix">
           <!-- Pretty standard, but will obviously have to go in and fix. -->
-					<ul>
+					<ul role="navigation">
 						<!-- ForEach on Menu options -->
+                         @for (nav of navigation; track nav.routeName){
 							<li>
-								<a> <!-- removing menu list items for now; they go here -->
+								<a [routerLink]="nav.routeLink"> {{nav.routeName}} <!-- removing menu list items for now; they go here -->
 									<!-- if there are notifications for the user, insert them here -->
                   <!-- notifications. the navigation stuff was broken, but also not broken; will need to use it as a reference when we restore that. This we will keep for now -->
 										<div class="tip-holder" >
@@ -69,6 +70,7 @@
 										</div>
 								</a>
 							</li>
+                        }
 					</ul>
             </div>
         </div>
@@ -290,7 +292,8 @@
 					</div>
 				<!-- the actual content. with the boards and things. -->
                  <!-- slap the router outlet here! -->
-                <app-home></app-home>
+                <router-outlet></router-outlet>
+                <!-- <app-home></app-home> -->
 				<!-- shoutbox content. -->
 			</div>
             

@@ -1,0 +1,97 @@
+$[form.header]
+<div class="reomusersum">
+    <table style="width:100%;"><tr>
+    	<td class="reomuserlink1">
+            <!-- {foreach $[user.mini_custom_field]}{if $[user.mini_custom_field.name] == "Profile"} -->
+            <a href="$[user.mini_custom_field.value]">
+                <!-- {/if}{/foreach} -->
+            <div class="reomuserlink"><i class="lnr lnr-license"></i> APPLICATION</div>
+            <!-- {foreach $[user.mini_custom_field]}{if $[user.mini_custom_field.name] == "Profile"} -->
+        </a>
+        <!-- {/if}{/foreach} -->
+    </td>
+        <td class="reomuserlink2"></td>
+    	<td class="reomuserlink1">
+            <!-- {foreach $[user.mini_custom_field]}{if $[user.mini_custom_field.name] == "Plot Page"} -->
+            <a href="$[user.mini_custom_field.value]">
+                <!-- {/if}{/foreach} -->
+            <div class="reomuserlink"><i class="lnr lnr-users"></i> PLOTTER</div>
+            <!-- {foreach $[user.mini_custom_field]}{if $[user.mini_custom_field.name] == "Plot Page"} -->
+        </a>
+        <!-- {/if}{/foreach} -->
+    </td>
+        <td class="reomuserlink2"></td>
+    	<td class="reomuserlink1">
+            <!-- {foreach $[user.mini_custom_field]}{if $[user.mini_custom_field.name] == "Locker"} -->
+            <a href="$[user.mini_custom_field.value]">
+                <!-- {/if}{/foreach} -->
+            <div class="reomuserlink"><i class="lnr lnr-map"></i> LOCKER</div>
+            <!-- {foreach $[user.mini_custom_field]}{if $[user.mini_custom_field.name] == "Locker"} -->
+        </a>
+        <!-- {/if}{/foreach} -->
+    </td>
+        <td class="reomuserlink2"></td>
+    	<td class="reomuserlink1"><a href="$[user.href]/recent"><div class="reomuserlink"><i class="lnr lnr-bubble"></i> POSTS</div></a></td>
+        <td class="reomuserlink2"></td>
+    	<td class="reomuserlink1"><a href="$[user.href]/recent_threads"><div class="reomuserlink"><i class="lnr lnr-layers"></i> THREADS</div></a></td>
+    </tr></table>
+</div>
+<!-- style="background-color:#$[user.group.color]!important;" -->
+<div class="reomuserrightt" >
+    <table style="width:100%;height:100%;"><tr><td style="padding:0px!important;vertical-align:bottom;">
+        <!-- {foreach $[user.mini_custom_field]}{if $[user.mini_custom_field.name] == "Played By"} -->
+        <h1>PLAYED BY</h1>
+        <h2>$[user.mini_custom_field.value]</h2>
+        <!-- {/if}{/foreach} -->
+        </td></tr></table>
+</div>
+<div class="reomusersum1">
+    <table style="width:100%;height:100%;"><tr>
+        <td class="reomusersum2" style="width:15%;">
+            <div><h1>$[user.posts]</h1>POSTS</div>
+            <div><h1><span style="display:none;">$[user]</span><span class='money_amount'></span></h1>
+                    
+                    <!--- REPLACE THIS WITH THE NAME OF YOUR CURRENCY --->
+                    EXP
+                
+            </div>
+        </td>
+        <td class="reomusersum2">
+            	<!--- CUSTOM FIELD #1 --->
+                <div>
+                    <h1>OCCUPATION</h1>
+                    <!-- {foreach $[user.mini_custom_field]}{if $[user.mini_custom_field.name] == "Occupation"}
+                    $[user.mini_custom_field.value]{/if}{/foreach} -->
+                </div>
+                
+                <!--- CUSTOM FIELD #2 --->
+                <div>
+                    <h1>ALIAS</h1>
+                    <!-- {foreach $[user.mini_custom_field]}{if $[user.mini_custom_field.name] == "Alias"}
+                    $[user.mini_custom_field.value]{/if}{/foreach} -->
+                </div>
+        </td>
+        <td class="reomusersum2">
+            	<!--- CUSTOM FIELD #3 --->
+                <div>
+                    <h1>EVENT TOKENS</h1>
+                    <!-- {foreach $[user.mini_custom_field]}{if $[user.mini_custom_field.name] == "Event Tokens"}
+                    $[user.mini_custom_field.value]{/if}{/foreach} -->
+                </div>
+                
+                <!--- CUSTOM FIELD #4 --->
+                <div>
+                    <h1>PLAYED BY</h1>
+                    <!-- {foreach $[user.mini_custom_field]}{if $[user.mini_custom_field.name] == "OOC Name"}
+                    $[user.mini_custom_field.value]{/if}{/foreach} -->
+                </div>
+        </td>
+        <td class="reomusersum2">
+            <div><h1>JOINED ON</h1>
+                $[user.registered_on]</div>
+            <div><h1>LAST ON</h1>
+                $[user.last_online]</div>
+        </td>
+        </tr></table>
+</div>
+$[form.footer]
