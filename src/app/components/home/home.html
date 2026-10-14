@@ -4,14 +4,18 @@
  <!-- Note: this category stuff doesn't seem to present on site. Might delete this block later
   UPDATE: The Board List goes here.  -->
   <!-- foreach here on category. Each category has an array of board lists. -->
+@for (cat of categories(); track cat.category_id) {
 	<!-- category anchor component here -->
 	<div class="container boards">
-        <div class="reomcatname"><h1>category.name</h1><span>$[category.display_name]</span></div>
+        <div class="reomcatname"><h1>{{cat.name}}</h1><span>{{cat.name}}</span></div>
+        <!-- @for(board of cat.board_list; track board.board_id){ -->
 		<div class="content cap-bottom">
             <!-- replace with board list component, will insert data based on that. -->
-			category.board_list
+			<app-board-list></app-board-list>
 		</div>
+    <!-- } -->
 	</div>
+}
 <div class="reomcatname"><h1>FORUM STATISTICS</h1><span>WELCOME TO FIGHT FOR JUSTICE</span></div>
 <div class="reominfoo">
     <div class="reominfonum" title="ONLINE TODAY"><div><h1>total_staff_online_24</h1>

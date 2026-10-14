@@ -253,7 +253,26 @@
             </div>
         </div>
         </div>
+        <!-- This is temporary. Will put this in a modal later. -->
+        <div>
+            <h2>Register</h2>
+            <form action="" (NgSubmit)="onSubmit(regForm)" #regForm="ngForm">
+                <input [(ngModel)]="email" type="text" name="email" placeholder="Email" required>
+                <input [(ngModel)]="password" type="text" name="password" placeholder="password" required>
+                <button type="submit" [disabled]="regForm.invalid">Register</button>
+            </form>
+        </div>
+
+        <div>
+            <h2>Login</h2>
+            <form action="" (NgSubmit)="onSubmit(login)" #login="ngForm">
+                <input [(ngModel)]="email" type="text" name="email" placeholder="Email" required>
+                <input [(ngModel)]="password" type="text" name="password" placeholder="password" required>
+                <button type="submit" [disabled]="login.invalid">Login</button>
+            </form>
+        </div>
         
+        <!-- End temporary space -->
         <div class="reombannerimg">
             <div class="reombanner">
                 <div></div>
@@ -270,6 +289,7 @@
 				<div id="navigation-tree">
 					<!-- Nav tree. That said, this feels more like breadcrumbs. Look into that instead. -->
 				</div>
+                <!-- end if block -->
         </div>
         <!-- this is where all the replaceable components will need to go. -->
         <div class="reomwrapper">

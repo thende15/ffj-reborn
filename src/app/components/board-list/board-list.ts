@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-board-list',
@@ -6,4 +6,10 @@ import { Component } from '@angular/core';
   templateUrl: './board-list.html',
   styleUrl: './board-list.css',
 })
-export class BoardList {}
+export class BoardList implements OnInit {
+  board = input<any>()
+
+  ngOnInit(): void {
+    console.log(this.board)
+  }
+}
