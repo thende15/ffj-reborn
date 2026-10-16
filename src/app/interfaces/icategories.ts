@@ -2,11 +2,11 @@ export interface ICategories {
     category_id: number;
     name: string;
     position: number;
-    boards: IBoard[];
+    board_list: IBoard[];
 }
 
 //Includes all boards, main and sub
-interface IBoard {
+export interface IBoard {
     board_id: number;
     category_id: number; //Need to determine category structure to slot this in.
     parent_id: number | null;  //NULL = top level of its category

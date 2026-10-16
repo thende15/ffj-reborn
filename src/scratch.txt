@@ -2390,3 +2390,221 @@ Structure going into this:
 Main 
     Home
         Boardlist
+
+2. Query the categories and boards together
+You can fetch everything in a single query using a LEFT JOIN.
+
+sql
+SELECT
+    c.category_id,
+    c.name AS category_name,
+    c.position AS category_position,
+
+    b.board_id,
+    b.category_id AS board_category_id,
+    b.parent_id,
+    b.name AS board_name,
+    b.slug,
+    b.description,
+    b.threads,
+    b.posts,
+    b.position AS board_position,
+    b.updated_at
+
+FROM categories c
+LEFT JOIN boards b
+    ON b.category_id = c.category_id
+
+ORDER BY
+    c.position,
+    b.position;
+Why LEFT JOIN? It ensures categories with no boards are still returned. Each category will have one row per matching board, so we need to group the rows in TypeScript.
+
+3. Build the nested objects in your Next.js backend
+This is the key part. The following implementation builds the exact structure your interfaces describe, including nested sub-boards at multiple levels.
+
+Create lib/categories.ts:
+
+typescript
+
+import { pool } from "@/lib/db";
+
+export interface IBoard {
+  board_id: number;
+  category_id: number;
+  parent_id: number | null;
+  name: string;
+  slug: string;
+  description: string;
+  threads: number | null;
+  posts: number | null;
+  position: number;
+  updated_at: string;
+  sub_board: IBoard[];
+}
+
+export interface ICategories {
+  category_id: number;
+  name: string;
+  position: number;
+  boards: IBoard[];
+}
+
+interface JoinedRow {
+  category_id: number;
+  category_name: string;
+  category_position: number;
+  board_id: number | null;
+  board_category_id: number | null;
+  parent_id: number | null;
+  board_name: string | null;
+  slug: string | null;
+  description: string | null;
+  threads: number | null;
+  posts: number | null;
+  board_position: number | null;
+  updated_at: Date | string | null;
+}
+
+export async function getCategories(): Promise<ICategories[]> {
+  const { rows } = await pool.query<JoinedRow>(`
+    SELECT
+      c.category_id,
+      c.name AS category_name,
+      c.position AS category_position,
+      b.board_id,
+      b.category_id AS board_category_id,
+      b.parent_id,
+      b.name AS board_name,
+      b.slug,
+      b.description,
+      b.threads,
+      b.posts,
+      b.position AS board_position,
+      b.updated_at
+    FROM categories c
+    LEFT JOIN boards b
+      ON b.category_id = c.category_id
+    ORDER BY c.position, b.position, b.board_id
+  `);
+
+  const categoryMap = new Map<number, ICategories>();
+  const boardMap = new Map<number, IBoard>();
+
+  // Pass 1: Create categories and all board objects.
+  for (const row of rows) {
+    if (!categoryMap.has(row.category_id)) {
+      categoryMap.set(row.category_id, {
+        category_id: row.category_id,
+        name: row.category_name,
+        position: row.category_position,
+        boards: [],
+      });
+    }
+
+    // LEFT JOIN produces null board IDs for empty categories.
+    if (row.board_id === null) continue;
+
+    if (!boardMap.has(row.board_id)) {
+      boardMap.set(row.board_id, {
+        board_id: row.board_id,
+        category_id: row.board_category_id!,
+        parent_id: row.parent_id,
+        name: row.board_name!,
+        slug: row.slug!,
+        description: row.description!,
+        threads: row.threads,
+        posts: row.posts,
+        position: row.board_position!,
+        updated_at: row.updated_at
+          ? new Date(row.updated_at).toISOString()
+          : "",
+        sub_board: [],
+      });
+    }
+  }
+
+  // Pass 2: Attach each board to its parent or category.
+  for (const board of boardMap.values()) {
+    if (board.parent_id !== null) {
+      const parent = boardMap.get(board.parent_id);
+
+      if (
+        parent &&
+        parent.category_id === board.category_id
+      ) {
+        parent.sub_board.push(board);
+        continue;
+      }
+    }
+
+    // Top-level board, or a board with a missing/invalid parent.
+    categoryMap.get(board.category_id)?.boards.push(board);
+  }
+
+  // Sort every level by position.
+  function sortBoards(boards: IBoard[]): void {
+    boards.sort(
+      (a, b) =>
+        a.position - b.position || a.board_id - b.board_id
+    );
+
+    for (const board of boards) {
+      sortBoards(board.sub_board);
+    }
+  }
+
+  const categories = [...categoryMap.values()].sort(
+    (a, b) =>
+      a.position - b.position ||
+      a.category_id - b.category_id
+  );
+
+  for (const category of categories) {
+    sortBoards(category.boards);
+  }
+
+  return categories;
+}
+How the implementation works
+categoryMap ensures each category appears only once.
+
+boardMap creates every board once, regardless of its nesting level.
+
+Pass 2 attaches each child board to its parent using parent_id. This works even when the child appears before its parent in the query results.
+
+sortBoards() sorts root boards and nested sub-boards by their position.
+
+Categories without boards are preserved with boards: [].
+
+The example places boards with a missing parent at the category's root level rather than silently losing them. In production, you may prefer to log those records or treat them as data-integrity errors.
+
+This assumes parent_id references boards.board_id and that a parent and child belong to the same category.
+
+4. Expose the data through an API route
+Create app/api/categories/route.ts:
+
+typescript
+
+import { NextResponse } from "next/server";
+import { getCategories } from "@/lib/categories";
+
+export async function GET() {
+  try {
+    const categories = await getCategories();
+
+    return NextResponse.json(categories);
+  } catch (error) {
+    console.error("Failed to fetch categories:", error);
+
+    return NextResponse.json(
+      { error: "Failed to fetch categories" },
+      { status: 500 }
+    );
+  }
+}
+Now request:
+
+text
+GET /api/categories
+The response will be a JSON array matching ICategories[], ready for your frontend.
