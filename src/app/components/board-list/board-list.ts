@@ -11,7 +11,6 @@ export class BoardList implements OnInit {
   board = input<IBoard>()
 
   ngOnInit(): void {
-    console.log(this.board)
   }
 
 }

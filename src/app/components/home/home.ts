@@ -26,6 +26,7 @@ export class Home implements OnInit, OnDestroy {
               for(let child of childBoards) {
                 if(child.parent_id === board.board_id){
                   board.sub_board.push(child)
+                  board.sub_board.sort((a, b) => a.position - b.position)
                 }
               }
             }

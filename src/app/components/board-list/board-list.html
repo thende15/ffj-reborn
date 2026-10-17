@@ -1,7 +1,7 @@
 <!-- there is a foreach on "board". this is just the list of items that we see on the main page of every item in a specific board.
  this has nothing to do with the "board" component, though that data is probably found in this particular list. -->
  <!-- REMEMBER: THIS SHOWS ON THE MAIN PAGE -->
-<div id="$[board.content_id]" class="$[board.content_class]"><div class="main clickable">
+<div [id]="board()?.board_id" class="o-board board item"><div class="main clickable">
     
         <!--- DEFAULT AVATAR IMAGE --->
         <div class="reomboredimgleft">
@@ -34,7 +34,9 @@
             </td></tr></table></div>
         </div>        
         <!-- name of the subboard -->
-        <div class="reomboredname">{{board()?.name}}</div>
+        <div class="reomboredname">
+            <a href="" class="js-board__link board-link">{{board()?.name}}</a> 
+        </div>
         <!-- most recent post -->
         <div class="reomboredrecent">
             @if (board()?.threads) {"board.last_thread BY board.last_thread.last_post.created_by ON board.last_thread.last_post.created_on"}
