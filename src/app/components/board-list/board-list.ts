@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input, OnInit } from '@angular/core';
+import { IBoard } from '../../interfaces/icategories';
 
 @Component({
   selector: 'app-board-list',
@@ -6,4 +7,10 @@ import { Component } from '@angular/core';
   templateUrl: './board-list.html',
   styleUrl: './board-list.css',
 })
-export class BoardList {}
+export class BoardList implements OnInit {
+  board = input<IBoard>()
+
+  ngOnInit(): void {
+  }
+
+}
