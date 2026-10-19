@@ -18,19 +18,23 @@
          Make default be Guest -->
         <div class="reomleftimg"><div class="reomleftimg2">
           <!-- if block; if user is guest, use this image. Otherwise, use user's avatar -->
+        @if(!token){
             <img src="https://i.imgur.com/Nv3Z27w.png">
+         }
+            
           </div></div>
-        
-        <!-- If user is guest, offer these.-->
-        <a href="" title="LOGIN"><div class="reomleftlog"><div>
-            <span class="lnr lnr-enter"></span></div></div></a>
-        <a href="" title="REGISTER"><div class="reomleftlog" style="margin:105px 0px 0px 40px;"><div>
-            <span class="lnr lnr-pencil"></span></div></div></a>
-        <!-- Else, use these -->
-        <a href="" title="LOGOUT"><div class="reomleftlog"><div>
-            <span class="lnr lnr-exit"></span></div></div></a>
-        <a href="" title="SWAP ACCOUNTS"><div class="reomleftlog" style="margin:105px 0px 0px 40px;"><div>
-            <span class="lnr lnr-sync"></span></div></div></a>
+        <app-modal></app-modal>
+         @if(!token){
+            <a href="" title="LOGIN"><div class="reomleftlog"><div>
+                <span class="lnr lnr-enter"></span></div></div></a>
+            <a title="REGISTER" (click)="openModal()"><div class="reomleftlog" style="margin:105px 0px 0px 40px;"><div>
+                <span class="lnr lnr-pencil"></span></div></div></a>
+         } @else {
+            <a href="" title="LOGOUT"><div class="reomleftlog"><div>
+                <span class="lnr lnr-exit"></span></div></div></a>
+            <a href="" title="SWAP ACCOUNTS"><div class="reomleftlog" style="margin:105px 0px 0px 40px;"><div>
+                <span class="lnr lnr-sync"></span></div></div></a>
+         }
             <!-- Our header essentially. Potentially combine avatar with these, look at simplifying as some of these are just empty divs. -->
         <div class="reomtop">
             <div class="reomtopp"></div>
@@ -253,26 +257,7 @@
             </div>
         </div>
         </div>
-        <!-- This is temporary. Will put this in a modal later. -->
-        <div>
-            <h2>Register</h2>
-            <form action="" (NgSubmit)="onSubmit(regForm)" #regForm="ngForm">
-                <input [(ngModel)]="email" type="text" name="email" placeholder="Email" required>
-                <input [(ngModel)]="password" type="text" name="password" placeholder="password" required>
-                <button type="submit" [disabled]="regForm.invalid">Register</button>
-            </form>
-        </div>
-
-        <div>
-            <h2>Login</h2>
-            <form action="" (NgSubmit)="onSubmit(login)" #login="ngForm">
-                <input [(ngModel)]="email" type="text" name="email" placeholder="Email" required>
-                <input [(ngModel)]="password" type="text" name="password" placeholder="password" required>
-                <button type="submit" [disabled]="login.invalid">Login</button>
-            </form>
-        </div>
         
-        <!-- End temporary space -->
         <div class="reombannerimg">
             <div class="reombanner">
                 <div></div>
@@ -364,5 +349,6 @@
         </div>
 		<!-- this is an if block for mobile browser; commented out for now -->
 			<!-- <br /><p class="center">Switch to the $[mobile_switch_link].</p> -->
+            
   </div>
 </div>
