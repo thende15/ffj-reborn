@@ -3,6 +3,8 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ModalService } from '../../services/modal-service';
 import { Auth } from '../../services/auth';
 import { FormControl, FormGroup, FormsModule, Validators, ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { IUser } from '../../interfaces/iuser';
+import { ModalMode } from '../enums';
 
 
 export class ModalConfig {
@@ -10,17 +12,20 @@ export class ModalConfig {
   description?: string = '';
   save?: Function = () => {};
   discard?: Function = () => {};
+  mode?: number = 10;
 
   constructor(
     title: string = '',
     description: string = '',
     save = null,
-    discard = null
+    discard = null,
+    mode: number = 10
   ) {
     if (title) this.title = title;
     if (description) this.description = description;
     if (save) this.save = save;
     if (discard) this.discard = discard;
+    if (mode) this.mode = mode;
   }
 }
 
@@ -34,22 +39,19 @@ export class ModalConfig {
 export class Modal implements OnInit {
   modalService = inject(ModalService)
   authService = inject(Auth);
+  mode = ModalMode
   fb = inject(FormBuilder)
-  // registerForm = new FormGroup({
-  //   email: new FormControl(''), 
-  //   password: new FormControl('')
-  // })
   registerForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required]
+    email: ['', [Validators.required, Validators.email
+    ]],
+    password: ['', Validators.required],
+    userName: ['', Validators.required],
+    handle: ['', Validators.required],
   })
-  email = '';
-  password = '';
   dialog = document.getElementById("dialog-box")
   dialogHead = document.getElementById("dialog-header")
 
   get open() {
-    console.log("checking to see if open property is called")
     return this.modalService.isOpen;
   }
 
@@ -69,6 +71,11 @@ export class Modal implements OnInit {
     if (this.config.save) {
       this.config.save(event)
     }
+  }
+
+  genId(): number {
+    let num = Math.floor(Math.random() * 100000)
+    return num < 100000 && num >= 10000 ? num : this.genId()
   }
 
   ngOnInit(): void {
@@ -108,7 +115,44 @@ export class Modal implements OnInit {
 
     //Absolutely not. TODO: make a proper form
   onSubmit() {
-    if(this.registerForm.valid) {
+    switch(this.modalService.config.mode){
+      case 0:
+        if(this.registerForm.valid){
+          console.log(this.registerForm.value)
+          let payload: IUser = {
+            email: this.registerForm.controls.email.value,
+            password: this.registerForm.controls.password.value, 
+            global_id: this.genId(),
+            accout_creation: new Date(),
+            profiles: [{
+              user_id: 0, //Need to reassign this
+              name: this.registerForm.controls.userName.value,
+              handle: this.registerForm.controls.handle.value,
+              group: {
+                id: 0, 
+                color: "",
+                name: ""
+              },
+              color: null,
+              avatar: null,
+              post_count: null,
+              profile: '{}',       //JSON custom fields, latest seen
+              exp: 0,
+              tokens: 0,
+              first_seen_at: new Date(), //Date 
+              updated_at: new Date()    //Date 
+            }]
+          }
+        }
+        break
+      case 1:
+        break
+      case 2:
+        break
+      default: 
+          console.log("Error has occurred")
+    }
+    // if(this.registerForm.valid) {
       // if(this.registerForm.email === "regForm") {
       //     this.authService.register(this.email, this.password).subscribe(
       //     data => {console.log(data)}
@@ -125,7 +169,7 @@ export class Modal implements OnInit {
       // );
       // }
       
-    }
+    // }
   }
 
   //Alright, let's do it like this: 

@@ -22,26 +22,45 @@
       </div>
       <div class="modal-body">
         <p>{{ config.description }}</p>
-        <!-- This is temporary. Will fix later. -->
-         <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-            <div>
-                <h2>Register</h2>
-                <input formControlName="email" type="text" name="email" placeholder="Email" required>
-                <input formControlName="password" type="text" name="password" placeholder="Password" required>
-                <button type="submit" [disabled]="registerForm.invalid">Register</button>
-            </div>
+        <!-- TODO: create a series of if/else blocks to keep our other forms. -->
+         @switch (config.mode){
+          @case (mode.Register) {
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+              <div>
+                  <h2>Register</h2>
+                  <label for="email">Email<span style="color: red;">*</span></label>
+                  <input formControlName="email" type="text" name="email" placeholder="Email">
+                  <label for="password">Password<span style="color: red;">*</span></label>
+                  <input formControlName="password" type="text" name="password" placeholder="Password">
+                  <!-- <button type="submit" [disabled]="registerForm.invalid">Register</button> -->
+              </div>
+              <div>
+                <h2>Create your first Profile!</h2>
+                <label for="userName">Username<span style="color: red;">*</span></label>
+                <input formControlName="userName" type="text" name="userName" placeholder="Insert Username here">
+                <label for="handle">Handle<span style="color: red;">*</span></label>
+                <!-- TODO: figure out how to permanently add an @ -->
+                <input formControlName="handle" type="text" name="handle" placeholder="What other people use to get your attention!">
+              </div>
 
-            <!-- <div>
-                <h2>Login</h2>
-                <form action="" (NgSubmit)="onSubmit(login)" #login="ngForm">
-                    <input [(ngModel)]="email" type="text" name="email" placeholder="Email" required>
-                    <input [(ngModel)]="password" type="text" name="password" placeholder="password" required>
-                    <button type="submit" [disabled]="login.invalid">Login</button>
-                </form>
-            </div> -->
-         </form>
-        
-        
+              
+          </form>
+          }
+          @case (mode.Login) {
+            <div>
+                  <h2>Login</h2>
+                  <form (NgSubmit)="onSubmit()" >
+                      <input type="text" name="email" placeholder="Email" required>
+                      <input type="text" name="password" placeholder="password" required>
+                      <button type="submit" >Login</button>
+                  </form>
+              </div>
+          }
+          @default {
+            <div>No form available</div>
+          }
+         }
+         
         <!-- End temporary space -->
       </div>
       <div class="modal-footer">

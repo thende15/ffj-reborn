@@ -11,7 +11,6 @@ export class ModalService {
   open(config: ModalConfig) {
     this.config = {...this.config, ...config}
     this.isOpen = true;
-    console.log("checking to see if service is working")
   }
 
 }

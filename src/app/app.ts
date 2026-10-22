@@ -6,6 +6,7 @@ import { Categories } from './services/categories';
 import { ICategories } from './interfaces/icategories';
 import { ModalService } from './services/modal-service';
 import { Modal } from './common/modal/modal';
+import { ModalMode } from './common/enums';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class App implements OnInit {
   modalService = inject(ModalService)
   catService = inject(Categories)
   token = localStorage.getItem('token')
+  mode = ModalMode
 
   navigation = [
     {routeName: "Home", routeLink: ""},
@@ -32,14 +34,12 @@ export class App implements OnInit {
 
   }
 
-  openModal() {
-    console.log('checking to see if button is working')
-    console.log(this.modalService.isOpen)
+  openModal(title: string, description: string, mode: number) {
     this.modalService.open({
-      title: 'test',
-      description: 'Description goes here'
+      title: title,
+      description: description,
+      mode: mode
     })
-    console.log(this.modalService.isOpen)
   }
   
 

@@ -20,3 +20,9 @@ export enum Groups {
     UAFaculty = 9, 
     Narrative = 10
 }
+
+export enum ModalMode {
+    Register = 0,
+    Login = 1, 
+    Switch = 2
+}

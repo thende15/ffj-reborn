@@ -25,9 +25,9 @@
           </div></div>
         <app-modal></app-modal>
          @if(!token){
-            <a href="" title="LOGIN"><div class="reomleftlog"><div>
+            <a title="LOGIN" (click)="openModal('Login', 'Please provide your email and password.', mode.Login)"><div class="reomleftlog"><div>
                 <span class="lnr lnr-enter"></span></div></div></a>
-            <a title="REGISTER" (click)="openModal()"><div class="reomleftlog" style="margin:105px 0px 0px 40px;"><div>
+            <a title="REGISTER" (click)="openModal('Register', 'Create your account here!', mode.Register)"><div class="reomleftlog" style="margin:105px 0px 0px 40px;"><div>
                 <span class="lnr lnr-pencil"></span></div></div></a>
          } @else {
             <a href="" title="LOGOUT"><div class="reomleftlog"><div>
