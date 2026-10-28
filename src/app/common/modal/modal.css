@@ -1,0 +1,49 @@
+/* Style the modal box */
+dialog {
+  border: none;
+  border-radius: 8px;
+  padding: 24px;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+
+  position: fixed;
+  top: 30%;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none; /* Allows interacting with background if needed */
+}
+
+/* Style the dim background (overlay) */
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px); 
+}
+
+/* Basic structural flex for the header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.ui-dialog-content {
+    background-color: #dddddd;
+}
+
+#dialog-box {
+    pointer-events: auto; /* Re-enables interactions for the dialog */
+    position: relative; /* Base position state */
+}
+
+#dialog-header {
+    cursor: move; /* Visual indicator that it is draggable */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none; /* Prevents text highlighting while dragging */
+}

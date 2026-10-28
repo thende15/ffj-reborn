@@ -1,0 +1,87 @@
+
+@if(open){
+    <dialog
+  class="ui-dialog ui-widget-content ui-corner-all ui-draggable ui-resizable"
+  tabindex="-1"
+  role="dialog"
+  style="display:block;"
+>
+  <div id="dialog-box" class="ui-dialog-content ui-widget-content" role="document">
+    <div class="modal-content">
+      <div id="dialog-header" class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix" style="display: flex; justify-content: space-between;">
+        <h5 class="ui-dialog-title">{{ config.title }}</h5>
+        <button
+          type="button"
+          class="ui-dialog-titlebar-close ui-corner-all"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="discardWrapper($event)"
+        >
+          <span aria-hidden="true" class="ui-icon ui-icon-closethick">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>{{ config.description }}</p>
+        <!-- TODO: create a series of if/else blocks to keep our other forms. -->
+         @switch (config.mode){
+          @case (mode.Register) {
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+              <div>
+                  <h2>Register</h2>
+                  <label for="email">Email<span style="color: red;">*</span></label>
+                  <input formControlName="email" type="text" name="email" placeholder="Email">
+                  <label for="password">Password<span style="color: red;">*</span></label>
+                  <input formControlName="password" type="text" name="password" placeholder="Password">
+                  <!-- <button type="submit" [disabled]="registerForm.invalid">Register</button> -->
+              </div>
+              <div>
+                <h2>Create your first Profile!</h2>
+                <label for="userName">Username<span style="color: red;">*</span></label>
+                <input formControlName="userName" type="text" name="userName" placeholder="Insert Username here">
+                <label for="handle">Handle<span style="color: red;">*</span></label>
+                <!-- TODO: figure out how to permanently add an @ -->
+                <input formControlName="handle" type="text" name="handle" placeholder="What other people use to get your attention!">
+              </div>
+
+              
+          </form>
+          }
+          @case (mode.Login) {
+            <div>
+                  <h2>Login</h2>
+                  <form (NgSubmit)="onSubmit()" >
+                      <input type="text" name="email" placeholder="Email" required>
+                      <input type="text" name="password" placeholder="password" required>
+                      <button type="submit" >Login</button>
+                  </form>
+              </div>
+          }
+          @default {
+            <div>No form available</div>
+          }
+         }
+         
+        <!-- End temporary space -->
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="saveWrapper($event)"
+        >
+          Save changes
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          (click)="discardWrapper($event)"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</dialog>
+}
+
