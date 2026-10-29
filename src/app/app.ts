@@ -33,11 +33,7 @@ export class App implements OnInit {
   categories: ICategories[] = []
 
   ngOnInit(): void {
-    console.log('testing how this works: ', this.boardService.getBoard(3))
-    this.boardService.getBoard(3).subscribe(data => {
-      console.log('okay, smartass, what does the data look like?', data)
-    })
-
+    
   }
 
   openModal(title: string, description: string, mode: number) {

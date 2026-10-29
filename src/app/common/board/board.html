@@ -1,11 +1,15 @@
 <!-- REMEMBER: THIS SHOWS ON A BOARD PAGE -->
 <!-- if block here, if there are subboards they go here -->
-<div class="container boards">
-    <div class="reomcatname"><h1>SUB-BOARDS</h1><span>BOARDS IN *insert name here*</span></div>
-    <div class="content cap-bottom">
-        subboard list
+@if(board()!.sub_board.length > 0) {
+    <div class="container boards">
+        <div class="reomcatname"><h1>SUB-BOARDS</h1><span>BOARDS IN {{ board()?.name | uppercase }}</span></div>
+        @for(sub_board of board()?.sub_board; track sub_board.board_id){
+            <div class="content cap-bottom">
+                <app-board-list [board]="sub_board"></app-board-list>
+            </div>
+        }
     </div>
-</div>
+}
 <!-- if block here, displays thread list if there is a list -->
  <!-- the id below also had an if block around it, which leads me to believe this component is also used for bookmarks -->
 <div 
@@ -17,7 +21,7 @@ class="container threads">
         <!-- if block, if the ability to create a thread exists -->
         <h1><a href="link to create thread here">CREATE THREAD</a></h1>
         <!-- end if block? -->
-        <span>boards's display name</span></div>
+        <span>{{ board()?.name | uppercase }}</span></div>
     <!-- there is a scroll class in the div below called $[scroll_class] -->
     <div class="control-bar ui-helper-clearfix ">
         search bar goes here
