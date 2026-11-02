@@ -1,3 +1,5 @@
+import { IThreads } from "./ithreads";
+
 export interface ICategories {
     category_id: number;
     name: string;
@@ -18,4 +20,5 @@ export interface IBoard {
     position: number; //Index essentially
     updated_at: string; //Date Object
     sub_board: IBoard[];
+    thread_list?: IThreads[]
 }
