@@ -10,6 +10,7 @@ export interface IUser {
     profiles: IProfile[];
 }
 
+//TODO: add a property that has user settings
 export interface IProfile {
     user_id: number;
     name: string | null; //fix null later

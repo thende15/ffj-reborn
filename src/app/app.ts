@@ -7,6 +7,7 @@ import { ICategories } from './interfaces/icategories';
 import { ModalService } from './services/modal-service';
 import { Modal } from './common/modal/modal';
 import { ModalMode } from './common/enums';
+import { BoardService } from './services/board-service';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class App implements OnInit {
   protected readonly title = signal('ffj-reborn');
   modalService = inject(ModalService)
   catService = inject(Categories)
+  boardService = inject(BoardService)
   token = localStorage.getItem('token')
   mode = ModalMode
 
@@ -31,7 +33,7 @@ export class App implements OnInit {
   categories: ICategories[] = []
 
   ngOnInit(): void {
-
+    
   }
 
   openModal(title: string, description: string, mode: number) {

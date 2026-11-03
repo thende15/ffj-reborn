@@ -4,10 +4,11 @@ import { ProfileHeader } from './components/profile/profile-header/profile-heade
 import { BoardList } from './components/board-list/board-list';
 import { Members } from './components/members/members';
 import { ProfileSummary } from './components/profile/profile-summary/profile-summary';
+import { Board } from './common/board/board';
 
 export const routes: Routes = [
     {path: '', component: Home},
-    {path: 'board/:id', component: BoardList},
+    // {path: 'board/:id', component: BoardList},
     //TODO: add user id to profile; do this once we get data
     //Profile will also need child routes
     {path: 'profile', component: ProfileHeader, 
@@ -15,5 +16,6 @@ export const routes: Routes = [
     },
     //TODO: add search 
     {path: 'members', component: Members},
+    {path: 'board/:id', component: Board},
     {path: '**', component: Home}
 ];

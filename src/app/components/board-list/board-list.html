@@ -1,7 +1,7 @@
 <!-- there is a foreach on "board". this is just the list of items that we see on the main page of every item in a specific board.
  this has nothing to do with the "board" component, though that data is probably found in this particular list. -->
  <!-- REMEMBER: THIS SHOWS ON THE MAIN PAGE -->
-<div [id]="board()?.board_id" class="o-board board item"><div class="main clickable">
+<div [id]="board()?.board_id" class="o-board board item"><div class="main clickable" (click)="route()">
     
         <!--- DEFAULT AVATAR IMAGE --->
         <div class="reomboredimgleft">
@@ -29,13 +29,13 @@
             <div class="reomboredsub"><table style="width:100%;height:100%;"><tr><td style="padding:0px!important;vertical-align:bottom;">
             <!-- foreach, shows the subboards on hover. Anchor has the link to it -->
              @for(subboard of board()?.sub_board; track subboard.board_id){
-            <a href=""><div class="rcboredsub1">{{subboard.name}}</div></a>
+            <a (click)="storeBoard()" [routerLink]="['board', subboard.board_id]"><div class="rcboredsub1">{{subboard.name}}</div></a>
             }
             </td></tr></table></div>
         </div>        
         <!-- name of the subboard -->
         <div class="reomboredname">
-            <a href="" class="js-board__link board-link">{{board()?.name}}</a> 
+            <a (click)="storeBoard()" [routerLink]="['board', board()?.board_id]" class="js-board__link board-link">{{board()?.name}}</a> 
         </div>
         <!-- most recent post -->
         <div class="reomboredrecent">
