@@ -114,35 +114,45 @@ export class Modal implements OnInit {
   }
 
     //Absolutely not. TODO: make a proper form
-  onSubmit() {
+  async onSubmit() {
     switch(this.modalService.config.mode){
       case 0:
         if(this.registerForm.valid){
-          console.log(this.registerForm.value)
+          let id = this.genId()
+          let date = await new Date();
           let payload: IUser = {
             email: this.registerForm.controls.email.value,
             password: this.registerForm.controls.password.value, 
-            global_id: this.genId(),
-            accout_creation: new Date(),
+            global_id: id,
+            accout_creation: date,
             profiles: [{
-              user_id: 0, //Need to reassign this
               name: this.registerForm.controls.userName.value,
               handle: this.registerForm.controls.handle.value,
-              group: {
+              group: `{
                 id: 0, 
                 color: "",
                 name: ""
-              },
+              }`,
               color: null,
               avatar: null,
-              post_count: null,
-              profile: '{}',       //JSON custom fields, latest seen
+              post_count: 0,
+              settings: '{}',       //JSON custom fields, latest seen
               exp: 0,
               tokens: 0,
-              first_seen_at: new Date(), //Date 
-              updated_at: new Date()    //Date 
+              first_seen_at: date, //Date 
+              updated_at: date,    //Date 
+              account_id: id,
+              logged_in: true
             }]
           }
+          this.authService.register(payload).subscribe({
+            next: (res:any) => {
+              this.authService.saveToken(res.token)
+            },
+            error: (err) => {
+              console.error('Failure to resolve registration', err)
+            }
+          })
         }
         break
       case 1:

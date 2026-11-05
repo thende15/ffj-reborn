@@ -12,16 +12,18 @@ export interface IUser {
 
 //TODO: add a property that has user settings
 export interface IProfile {
-    user_id: number;
+    profile_id?: number;
     name: string | null; //fix null later
     handle: string | null; //fix null later
-    group: IGroup;
+    group: IGroup | string;
     color: string | null;
     avatar: string | null;
     post_count: number | null;
-    profile: string;       //JSON custom fields, latest seen
+    settings: string;       //JSON custom fields, latest seen
     exp: number;
     tokens: number;
     first_seen_at: Date; //Date 
     updated_at: Date;    //Date 
+    account_id: number;
+    logged_in: boolean;
 }

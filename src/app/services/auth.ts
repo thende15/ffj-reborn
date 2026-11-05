@@ -10,8 +10,12 @@ export class Auth {
   apiUrl = 'http://localhost:3000/api';
   token: string | null = null;
 
-  register(email: string, password: string) {
-    return this.http.post(`${this.apiUrl}/auth/register`, {email: email, password: password})
+  register(payload: any) {
+    payload.account_creation = new Date()
+    payload.profiles[0].first_seen_at = new Date()
+    payload.profiles[0].updated_at = new Date()
+    localStorage.setItem("profile", JSON.stringify(payload.profiles[0]))
+    return this.http.post(`${this.apiUrl}/auth/register`, payload)
   }
 
   login(email: string, password: string) {
