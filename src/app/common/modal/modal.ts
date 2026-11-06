@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, output, signal } from '@angular/core';
 import { ModalService } from '../../services/modal-service';
 import { Auth } from '../../services/auth';
 import { FormControl, FormGroup, FormsModule, Validators, ReactiveFormsModule, FormBuilder } from '@angular/forms';
@@ -39,6 +39,7 @@ export class ModalConfig {
 export class Modal implements OnInit {
   modalService = inject(ModalService)
   authService = inject(Auth);
+  registerSuccess = output<void>();
   mode = ModalMode
   fb = inject(FormBuilder)
   registerForm = this.fb.group({
@@ -47,6 +48,11 @@ export class Modal implements OnInit {
     password: ['', Validators.required],
     userName: ['', Validators.required],
     handle: ['', Validators.required],
+  })
+  loginForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email
+    ]],
+    password: ['', Validators.required]
   })
   dialog = document.getElementById("dialog-box")
   dialogHead = document.getElementById("dialog-header")
@@ -148,6 +154,10 @@ export class Modal implements OnInit {
           this.authService.register(payload).subscribe({
             next: (res:any) => {
               this.authService.saveToken(res.token)
+              localStorage.setItem("profile", JSON.stringify(payload.profiles[0]))
+              this.registerSuccess.emit()
+              this.registerForm.reset()
+              this.modalService.isOpen = false;
             },
             error: (err) => {
               console.error('Failure to resolve registration', err)
@@ -156,6 +166,19 @@ export class Modal implements OnInit {
         }
         break
       case 1:
+        if(this.loginForm.valid) {
+          let payload = this.loginForm.value
+          this.authService.login(payload).subscribe({
+            next: (res: any) => {
+              this.authService.saveToken(res.token)
+              console.log(res.profiles)
+              localStorage.setItem("profile", JSON.stringify(res.profiles))
+              this.registerSuccess.emit()
+              this.loginForm.reset()
+              this.modalService.isOpen = false;
+            }
+          })
+        }
         break
       case 2:
         break

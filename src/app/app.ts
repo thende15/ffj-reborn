@@ -8,6 +8,7 @@ import { ModalService } from './services/modal-service';
 import { Modal } from './common/modal/modal';
 import { ModalMode } from './common/enums';
 import { BoardService } from './services/board-service';
+import { IProfile } from './interfaces/iuser';
 
 
 @Component({
@@ -21,7 +22,11 @@ export class App implements OnInit {
   modalService = inject(ModalService)
   catService = inject(Categories)
   boardService = inject(BoardService)
-  token = localStorage.getItem('token')
+  authService = inject(Auth)
+  //keep this, but have an update fuction as we'll be using that a lot
+  token = signal<string | null>(localStorage.getItem('jwt') || null) 
+  profileStorage = localStorage.getItem("profile")
+  profile = signal<IProfile | null>(this.profileStorage ? JSON.parse(this.profileStorage) : null)
   mode = ModalMode
 
   navigation = [
@@ -33,7 +38,8 @@ export class App implements OnInit {
   categories: ICategories[] = []
 
   ngOnInit(): void {
-    
+    this.updateToken()
+    console.log(typeof(this.profile()))
   }
 
   openModal(title: string, description: string, mode: number) {
@@ -44,13 +50,17 @@ export class App implements OnInit {
     })
   }
   
+  updateToken() {
+    this.token.update((token) => localStorage.getItem('jwt') || null)
+  }
 
   login() {
 
   }
 
   logout() {
-
+    this.authService.logout()
+    this.updateToken()
   }
 
 

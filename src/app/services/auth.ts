@@ -14,12 +14,11 @@ export class Auth {
     payload.account_creation = new Date()
     payload.profiles[0].first_seen_at = new Date()
     payload.profiles[0].updated_at = new Date()
-    localStorage.setItem("profile", JSON.stringify(payload.profiles[0]))
     return this.http.post(`${this.apiUrl}/auth/register`, payload)
   }
 
-  login(email: string, password: string) {
-    return this.http.post(`${this.apiUrl}/auth/login`, {email: email, password: password})
+  login(payload: any) {
+    return this.http.post(`${this.apiUrl}/auth/login`, payload)
   }
 
   //In the login function on the login page, this is being called
@@ -37,5 +36,6 @@ export class Auth {
   logout() {
     this.token = null;
     localStorage.removeItem('jwt')
+    localStorage.removeItem('profile')
   }
 }
