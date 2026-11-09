@@ -18,19 +18,21 @@
          Make default be Guest -->
         <div class="reomleftimg"><div class="reomleftimg2">
           <!-- if block; if user is guest, use this image. Otherwise, use user's avatar -->
-        @if(!token){
+        @if(!token() || !profile()?.avatar){
             <img src="https://i.imgur.com/Nv3Z27w.png">
+         } @else {
+            <img [src]="profile()?.avatar">
          }
             
           </div></div>
-        <app-modal></app-modal>
-         @if(!token){
+        <app-modal (registerSuccess)="updateToken()"></app-modal>
+         @if(!token()){
             <a title="LOGIN" (click)="openModal('Login', 'Please provide your email and password.', mode.Login)"><div class="reomleftlog"><div>
                 <span class="lnr lnr-enter"></span></div></div></a>
             <a title="REGISTER" (click)="openModal('Register', 'Create your account here!', mode.Register)"><div class="reomleftlog" style="margin:105px 0px 0px 40px;"><div>
                 <span class="lnr lnr-pencil"></span></div></div></a>
          } @else {
-            <a href="" title="LOGOUT"><div class="reomleftlog"><div>
+            <a (click)="logout()" title="LOGOUT"><div class="reomleftlog"><div>
                 <span class="lnr lnr-exit"></span></div></div></a>
             <a href="" title="SWAP ACCOUNTS"><div class="reomleftlog" style="margin:105px 0px 0px 40px;"><div>
                 <span class="lnr lnr-sync"></span></div></div></a>
