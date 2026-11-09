@@ -5,6 +5,7 @@ import { Auth } from '../../services/auth';
 import { FormControl, FormGroup, FormsModule, Validators, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { IUser } from '../../interfaces/iuser';
 import { ModalMode } from '../enums';
+import { RegisterResponse } from '../../interfaces/responses';
 
 
 export class ModalConfig {
@@ -152,7 +153,7 @@ export class Modal implements OnInit {
             }]
           }
           this.authService.register(payload).subscribe({
-            next: (res:any) => {
+            next: (res: any) => {
               this.authService.saveToken(res.token)
               localStorage.setItem("profile", JSON.stringify(payload.profiles[0]))
               this.registerSuccess.emit()
