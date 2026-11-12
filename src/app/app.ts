@@ -30,10 +30,10 @@ export class App implements OnInit {
   mode = ModalMode
 
   navigation = [
-    {routeName: "Home", routeLink: ""},
-    {routeName: "Search", routeLink: "search"},
-    {routeName: "Members", routeLink: "members"},
-    {routeName: "Profile", routeLink: "profile"}
+    {routeName: "Home", routeLink: "/"},
+    {routeName: "Search", routeLink: "/search"},
+    {routeName: "Members", routeLink: "/members"},
+    {routeName: "Profile", routeLink: "/profile"}
   ];
   categories: ICategories[] = []
 

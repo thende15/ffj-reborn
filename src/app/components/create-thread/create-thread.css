@@ -1,0 +1,19 @@
+/* .size {
+    min-height: 250px;
+    min-width: 100%;
+    background-color: #ffffff;
+} */
+ .tiptap {
+    background-color: #ffffff;
+    min-height: 200px;
+ }
+
+.ProseMirror {
+    background-color: #ffffff;
+    min-height: 200px;
+ }
+ .toolbar-buttons {
+    background-color: none;
+    line-height: 0px !important;
+    padding: 0px;
+ }

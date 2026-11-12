@@ -1,0 +1,147 @@
+<div class="container new-area wysiwyg-area">
+	<div class="title-bar">
+		<h2>Create Thread</h2>
+	</div>
+	<div class="content cap-bottom">
+		<form action="">
+			<!-- {if $[form.created_by_guest_name.input]}
+				<div class="guest_name">
+					<label>Guest Name:</label>
+					$[form.created_by_guest_name.input]
+				</div>
+			{/if} -->
+			<div class="subject_line">
+				<table>
+					<tr>
+						<td class="subject">
+							<label>Subject:</label>
+						</td>
+						<td>
+							<!-- think I'll remove this; not needed -->
+							<!-- <div class="controls">
+								$[poll_button]
+								$[event_button]
+								$[attachment_button]
+								$[options]
+							</div> -->
+							<!-- TODO: create a proper input for this. Single form control ought to be enough -->
+							<div class="subject_input">
+								<input type="text" [formControl]="subjectControl">
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<!-- {if $[form.recipients.input]}
+				<div class="recipients">
+					<label>Recipients:</label>
+					$[form.recipients.input]
+				</div>
+			{/if} -->
+			<!-- not 100% sure what this block is doing -->
+			<!-- {if $[participant]}
+				<div class="participants">
+					Participants:
+					<span class="$[participant_list_class]">
+						{foreach $[participant]}$[participant]$[participant.comma] {/foreach}
+					</span>
+					{if $[change_participants_button]}($[change_participants_button]){/if}
+				</div>
+			{/if} -->
+			<!-- editor goes here -->
+			 <!-- Editor is not filling out the size that I want. will have to figure out wtf to do about that. styling is being a pain -->
+			<div class="editor ui-helper-clearfix">
+				<!-- Editor controls -->
+				<div>
+					<select name="font-family" id="">
+						<option selected value="">Font Family</option>
+					</select>
+					<select name="font-size" id="">
+						<option selected value="">Font Size</option>
+					</select>
+					<!-- <ul>
+						<li class="button button-bold"><img src="//storage.proboards.com/forum/images/bbcode/bold.png" alt=""></li>
+						<li class="button"><img src="//storage.proboards.com/forum/images/bbcode/italic.png" alt=""></li>
+						<li class="button"></li>
+						<li class="button"></li>
+					</ul> -->
+					<!-- Need a new class for these that removes the background color, line-height, and padding (which is tied to input type=button)-->
+					 <input type="color" (input)="toolbarOption('color', $event)" [value]="editor.getAttributes('textStyle')['color'] || '#000000'">
+					<!-- <button class="toolbar-buttons" (click)="toolbarOption('color')" type="button"><img src="//storage.proboards.com/forum/images/bbcode/color.png" alt="color picker"></button> -->
+					<button class="toolbar-buttons" (click)="toolbarOption('bold', $event)" type="button"><img src="//storage.proboards.com/forum/images/bbcode/bold.png" alt="bold"></button>
+					<button class="toolbar-buttons" (click)="toolbarOption('italics', $event)" type="button"><img src="//storage.proboards.com/forum/images/bbcode/italic.png" alt="italic"></button>
+					<button class="toolbar-buttons" (click)="toolbarOption('underline', $event)" type="button"><img src="//storage.proboards.com/forum/images/bbcode/underline.png" alt="underline"></button>
+					<button class="toolbar-buttons" (click)="toolbarOption('strikethrough', $event)" type="button"><img src="//storage.proboards.com/forum/images/bbcode/strikethrough.png" alt="strikethrough"></button>
+					<button class="toolbar-buttons" (click)="toolbarOption('superscript', $event)" type="button"><img src="//storage.proboards.com/forum/images/bbcode/superscript.png" alt="superscript"></button>
+					<button class="toolbar-buttons" (click)="toolbarOption('subscript', $event)" type="button"><img src="//storage.proboards.com/forum/images/bbcode/subscript.png" alt="subscript"></button>
+
+					<button class="toolbar-buttons" type="button"><img src="//storage.proboards.com/forum/images/bbcode/justify-left.png" alt="justify left"></button>
+					<button class="toolbar-buttons" type="button"><img src="//storage.proboards.com/forum/images/bbcode/justify-center.png" alt="justify center"></button>
+					<button class="toolbar-buttons" type="button"><img src="//storage.proboards.com/forum/images/bbcode/justify-right.png" alt="justify right"></button>
+					<button class="toolbar-buttons" type="button"><img src="//storage.proboards.com/forum/images/bbcode/justify-full.png" alt="justify all"></button>
+					<button class="toolbar-buttons" type="button"><img src="//storage.proboards.com/forum/images/bbcode/table.png" alt="table"></button>
+					<button class="toolbar-buttons" type="button"><img src="//storage.proboards.com/forum/images/bbcode/list.png" alt="list"></button>
+					<button class="toolbar-buttons" type="button"><img src="//storage.proboards.com/forum/images/bbcode/horizontal-rule.png" alt="horizontal line"></button>
+
+					<button class="toolbar-buttons" type="button"><img src="//storage.proboards.com/forum/images/bbcode/link.png" alt="create link"></button>
+					<button class="toolbar-buttons" type="button"><img src="//storage.proboards.com/forum/images/bbcode/email.png" alt="email"></button>
+					<button class="toolbar-buttons" type="button"><img src="//storage.proboards.com/forum/images/bbcode/image.png" alt="insert image"></button>
+					<button class="toolbar-buttons" type="button"><img src="//storage.proboards.com/forum/images/bbcode/movie.png" alt="insert video"></button>
+					<button class="toolbar-buttons" type="button"><img src="//storage.proboards.com/forum/images/bbcode/membersearch.png" alt="insert user link"></button>
+					<button class="toolbar-buttons" type="button"><img src="//storage.proboards.com/forum/images/bbcode/code.png" alt="insert code"></button>
+					<button class="toolbar-buttons" type="button"><img src="//storage.proboards.com/forum/images/bbcode/quote.png" alt="insert quote"></button>
+					<button class="toolbar-buttons" type="button"><img src="//storage.proboards.com/forum/images/bbcode/smiley.png" alt="insert smiley"></button>
+					<button class="toolbar-buttons" type="button"><img src="//storage.proboards.com/forum/images/bbcode/embed.png" alt="insert embed"></button>
+					<button class="toolbar-buttons" type="button"><img src="//storage.proboards.com/7321693/images/HESiGRHoXTCljHnssubV.png" alt="insert spoiler"></button>
+				</div>
+				<!-- <app-text-editor [editor]="editor"></app-text-editor> -->
+				 <tiptap-editor [editor]="editor"></tiptap-editor>
+			</div>
+			<!-- try to put errors here -->
+			<!-- {if $[form.updated_reason.input]}
+				<div class="edit_reason content-box pad-all-double">
+					<label>Edit Reason (optional):</label>
+					<div>$[form.updated_reason.input]</div>
+				</div>
+			{/if}
+			{if $[posting_errors]}
+				<div class="posting-errors">$[posting_errors]</div>
+			{/if} -->
+			<!-- do we really need a captcha here...? -->
+			<!-- $[captcha] -->
+			<div class="submit content-box pad-all-double">
+				<span class="float-right"><button tabindex="4">Create Thread</button></span>
+				<!-- truthfully, idk what this message is trying to say. maybe scrap? -->
+				<span class="note small left-item" id="$[transcription.id]">This thread has no effects applied to it.</span>
+			</div>
+			
+			<div id="show-attachment" class="attachment">
+				$[attachment_widget]
+			</div>
+		</form>
+	</div>
+</div>
+<!-- 
+{if $[summary]}
+	<div class="container $[summary.class]">
+		<div class="title-bar">
+			<h2>$[summary.title]</h2>
+		</div>
+		<div class="content cap-bottom">
+			<table class="list">
+				<tbody class="$[list_class]">
+					$[summary]
+				</tbody>
+			</table>
+		</div>
+	</div>
+{/if} -->
+<!-- <script>
+
+jQuery.fn.reverse = [].reverse;
+
+$(".container.posts.summary table.list tr").reverse().each(function(){
+$(this).appendTo($(this).parent());
+});
+
+</script> -->

@@ -4,10 +4,11 @@ import { BoardService } from '../../services/board-service';
 import { StorageService } from '../../services/storage-service';
 import { UpperCasePipe } from '@angular/common';
 import { BoardList } from '../../components/board-list/board-list';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-board',
-  imports: [ThreadList, UpperCasePipe, BoardList],
+  imports: [ThreadList, UpperCasePipe, BoardList, RouterLink],
   templateUrl: './board.html',
   styleUrl: './board.css',
 })

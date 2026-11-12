@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
 import { Home } from './components/home/home';
 import { ProfileHeader } from './components/profile/profile-header/profile-header';
-import { BoardList } from './components/board-list/board-list';
 import { Members } from './components/members/members';
 import { ProfileSummary } from './components/profile/profile-summary/profile-summary';
 import { Board } from './common/board/board';
+import { CreateThread } from './components/create-thread/create-thread';
 
 export const routes: Routes = [
     {path: '', component: Home},
@@ -17,5 +17,8 @@ export const routes: Routes = [
     //TODO: add search 
     {path: 'members', component: Members},
     {path: 'board/:id', component: Board},
+    // {path: 'thread/:id', component: Board},
+    // The id in new thread comes from the Board
+    {path: 'thread/new/:id', component: CreateThread},
     {path: '**', component: Home}
 ];

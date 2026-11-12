@@ -19,7 +19,8 @@
 class="container threads">
     <div class="reomcatname">
         <!-- if block, if the ability to create a thread exists -->
-        <h1><a href="link to create thread here">CREATE THREAD</a></h1>
+         <!-- pass in the board id as a param to the router link!!! -->
+        <h1><a [routerLink]="['/thread/new', board()?.board_id]">CREATE THREAD</a></h1>
         <!-- end if block? -->
         <span>{{ board()?.name | uppercase }}</span></div>
     <!-- there is a scroll class in the div below called $[scroll_class] -->
